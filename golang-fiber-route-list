@@ -1,0 +1,17 @@
+func listRoutes(app *fiber.App) []fiber.Route {
+	var routers []fiber.Route
+
+	for _, routes := range app.Stack() {
+		for _, route := range routes {
+			routers = append(routers, fiber.Route{
+				Method:   route.Method,
+				Path:     route.Path,
+				Handlers: route.Handlers,
+				Params:   route.Params,
+				Name:     route.Name,
+			})
+		}
+
+	}
+	return routers
+}
